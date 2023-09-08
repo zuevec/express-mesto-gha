@@ -58,7 +58,11 @@ module.exports.editUserData = (req, res) => {
 
 module.exports.editUserAvatar = (req, res) => {
   if (req.user._id) {
-    User.findByIdAndUpdate(req.user._id, { avatar:req.body.avatar }, { new: true, runValidators: true })
+    User.findByIdAndUpdate(
+      req.user._id,
+      { avatar: req.body.avatar },
+      { new: true, runValidators: true },
+    )
       .then((user) => {
         res.status(201).send(user);
       })
