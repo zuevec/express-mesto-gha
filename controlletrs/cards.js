@@ -22,7 +22,7 @@ module.exports.createCard = (req, res) => {
 module.exports.getCards = (req, res) => {
   Card.find({})
     .populate(['owner', 'likes'])
-    .then((data) => res.status(201).send(data))
+    .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send({ message: 'На сервере произошла ошибка' }));
 };
 
@@ -72,7 +72,7 @@ module.exports.dislikeCard = (req, res) => {
       .populate(['owner', 'likes'])
       .then((card) => {
         if (!card) {
-          res.status(404).send({ message: 'Карточка с указанным _id не найдена' });
+          res.status(400).send({ message: 'Карточка с указанным _id не найдена' });
           return;
         }
         res.send(card);
