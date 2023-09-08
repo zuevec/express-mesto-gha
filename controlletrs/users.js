@@ -9,7 +9,7 @@ module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
 
   User.create({ name, about, avatar })
-    .then((user) => res.status(201).send({ data: user }))
+    .then((user) => res.status(200).send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res.status(400).send({ message: err.message });
@@ -23,14 +23,10 @@ module.exports.getUser = (req, res) => {
   if (req.params.userId.length === 24) {
     User.findById(req.params.userId)
       .then((user) => {
-        res.status(201).send(user);
+        res.status(200).send(user);
       })
       .catch((err) => {
-        if (err.statusCode === 404) {
-          res.status(404).send({ message: 'Пользователь по указанному _id не найден.', err });
-        } else {
-          res.status(500).send({ message: 'На сервере произошла ошибка', err });
-        }
+        res.status(404).send({ message: 'Пользователь по указанному _id не найден.', err });
       });
   } else {
     res.status(400).send({ message: 'Некорректный _id пользователя' });
