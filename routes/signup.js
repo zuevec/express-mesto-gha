@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
+
 const urlPattern = require('../constant');
 const {
   createUser,
 } = require('../controlletrs/users');
-
-router.post('/', createUser);
+const { celebrate, Joi } = require('celebrate');
 
 router.post('/', celebrate({
   body: Joi.object().keys({
