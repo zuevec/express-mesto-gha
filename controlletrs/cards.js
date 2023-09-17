@@ -80,7 +80,7 @@ module.exports.likeCard = (req, res, next) => {
       if (err instanceof mongoose.Error.CastError) {
         next(new BadRequestError(`Некорректный _id: ${req.params.cardId}`));
       } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError(`Карточка с указанным _id: ${req.params.cardId} не найден`));
+        next(new NotFoundError(`Карточка с указанным _id: ${req.params.cardId} не найдена`));
       } else {
         next(err);
       }
