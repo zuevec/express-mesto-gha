@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const urlPattern = require('../constant');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -11,8 +12,8 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Заполните поле'],
     validate: {
-      validator(avatar) {
-        return /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(avatar);
+      validator(link) {
+        return urlPattern.test(link);
       },
       message: 'Здесь нужна ссылка',
     },
