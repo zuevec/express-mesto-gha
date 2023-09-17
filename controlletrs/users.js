@@ -99,7 +99,11 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     .catch((err) => {
-      next(err);
+      if (err instanceof mongoose.Error.DocumentNotFoundError) {
+        next(new NotFoundError(`Пользователь по указанному email: ${req.body.email} не найден`));
+      } else {
+        next(err);
+      }
     });
 };
 
