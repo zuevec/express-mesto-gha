@@ -78,9 +78,9 @@ module.exports.likeCard = (req, res, next) => {
     .then((card) => res.status(HTTP_STATUS_OK).send(card))
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        next(new BadRequestError(`Некорректный _id: ${req.params.userId}`));
+        next(new BadRequestError(`Некорректный _id: ${req.params.cardId}`));
       } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError(`Карточка с указанным _id: ${req.params.userId} не найден`));
+        next(new NotFoundError(`Карточка с указанным _id: ${req.params.cardId} не найден`));
       } else {
         next(err);
       }
