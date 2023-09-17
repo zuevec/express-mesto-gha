@@ -5,6 +5,8 @@ const {
   createUser,
 } = require('../controlletrs/users');
 
+router.post('/', createUser);
+
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
