@@ -100,7 +100,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError(`Пользователь по указанному email: ${req.body.email} не найден`));
+        next(new NotFoundError(`Пользователь по указанному _id: ${req.params.userId} не найден`));
       } else {
         next(err);
       }
