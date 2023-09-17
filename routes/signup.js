@@ -11,7 +11,7 @@ router.post('/', celebrate({
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().pattern(urlPattern),
     email: Joi.string().required().email(),
-    password: Joi.string().min(3),
+    password: Joi.string().required(),
   }).unknown(true),
 }), createUser);
 
