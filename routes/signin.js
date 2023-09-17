@@ -8,7 +8,7 @@ const {
 router.post('/', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(3),
+    password: Joi.string().required(),
   }).unknown(true),
 }), login);
 
