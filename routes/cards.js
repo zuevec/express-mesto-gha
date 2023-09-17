@@ -6,30 +6,30 @@ const {
   createCard, getCards, deleteCard, likeCard, dislikeCard,
 } = require('../controlletrs/cards');
 
-router.get('/cards', getCards);
+router.get('/', getCards);
 
-router.delete('/cards/:cardId', celebrate({
+router.delete('/:cardId', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
   }).unknown(true),
 }), deleteCard);
 
-router.post('/cards', celebrate({
+router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
     link: Joi.string().pattern(urlPattern).required(),
   }).unknown(true),
 }), createCard);
 
-router.put('/cards/:cardId/likes', celebrate({
+router.put('/:cardId/likes', celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().length(24).alphanum().required(),
+    cardId: Joi.string().hex().length(24),
   }).unknown(true),
 }), likeCard);
 
-router.delete('/cards/:cardId/likes', celebrate({
+router.delete('/:cardId/likes', celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().length(24).alphanum().required(),
+    cardId: Joi.string().hex().length(24),
   }).unknown(true),
 }), dislikeCard);
 
