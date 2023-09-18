@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const urlPattern = require('../constant');
+const isURL = require('validator/lib/isURL');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -13,7 +13,7 @@ const cardSchema = new mongoose.Schema({
     required: [true, 'Заполните поле'],
     validate: {
       validator(link) {
-        return urlPattern.test(link);
+        return isURL(link);
       },
       message: 'Здесь нужна ссылка',
     },
@@ -26,11 +26,12 @@ const cardSchema = new mongoose.Schema({
   likes: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
+    default: [],
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-}, { versionKey: false });
+});
 
 module.exports = mongoose.model('card', cardSchema);
