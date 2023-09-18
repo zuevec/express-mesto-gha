@@ -87,6 +87,7 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
+    .populate(['owner', 'likes'])
     .then((card) => res.status(HTTP_STATUS_OK).send(card))
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
